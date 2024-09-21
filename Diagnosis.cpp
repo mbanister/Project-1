@@ -435,159 +435,159 @@ void Diagnosis::askQuestion() {
             }
             break;
         case 4:
-            while(list.variable[switchNum][4] != '1' && list.variable[switchNum][4] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Will the battery hold a charge?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][4];
+                cin >> list.variable[switchNum][3];
             }
             break;
         case 5:
-            while(list.variable[switchNum][5] != '1' && list.variable[switchNum][5] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Is the Tire Pressure Monitoring System (TPMS) light on?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][5];
+                cin >> list.variable[switchNum][3];
             }
             break;
         case 6:
-            while(list.variable[switchNum][6] != '1' && list.variable[switchNum][6] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Is the temperature warning light on?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][6];
+                cin >> list.variable[switchNum][3];
             }
             break;
         case 7:
-            while(list.variable[switchNum][7] != '1' && list.variable[switchNum][7] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Is the coolant level low?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][7];
+                cin >> list.variable[switchNum][3];
             }
             break;
         case 8:
-            while(list.variable[switchNum][8] != '1' && list.variable[switchNum][8] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Does the engine emit a squeaking noise while running?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][8];
+                cin >> list.variable[switchNum][3];
             }
             break;
         case 9:
-            while(list.variable[switchNum][9] != '1' && list.variable[switchNum][9] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Is the radiator fan clogged?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][9];
+                cin >> list.variable[switchNum][3];
             }
             break;
         case 10:
-            while(list.variable[switchNum][10] != '1' && list.variable[switchNum][10] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Is the thermostat malfunctioning?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][10];
+                cin >> list.variable[switchNum][3];
             }
             break;
         case 11:
-            while(list.variable[switchNum][11] != '1' && list.variable[switchNum][11] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Is the Window Washer Fluid (WWF) light on?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][11];
+                cin >> list.variable[switchNum][3];
             }
             break;
         case 12:
-            while(list.variable[switchNum][12] != '1' && list.variable[switchNum][12] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Are any of the windows stuck in an open or closed position?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][12];
+                cin >> list.variable[switchNum][3];
             }
             break;
         case 13:
-            while(list.variable[switchNum][13] != '1' && list.variable[switchNum][13] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Does the car emit a clicking noise while turning?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][13];
+                cin >> list.variable[switchNum][3];
             }
             break;
         case 14:
-            while(list.variable[switchNum][14] != '1' && list.variable[switchNum][14] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Is the car difficult to turn?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][14];
+                cin >> list.variable[switchNum][3];
             }
             break;
         case 15:
-            while(list.variable[switchNum][15] != '1' && list.variable[switchNum][15] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Is the brake warning light on?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][15];
+                cin >> list.variable[switchNum][3];
             }
             break;
         case 16:
-            while(list.variable[switchNum][16] != '1' && list.variable[switchNum][16] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Is the brake fluid level low?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][16];
+                cin >> list.variable[switchNum][3];
             }
             break;
         case 17:
-            while(list.variable[switchNum][17] != '1' && list.variable[switchNum][17] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Are the brake pads worn?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][17];
+                cin >> list.variable[switchNum][3];
             }
             break;
         case 18:
-            while(list.variable[switchNum][18] != '1' && list.variable[switchNum][18] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Is the ABS light on?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][18];
+                cin >> list.variable[switchNum][3];
             }
             break;
         case 19:
-            while(list.variable[switchNum][19] != '1' && list.variable[switchNum][19] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Is the oil pressure low?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][19];
+                cin >> list.variable[switchNum][3];
             }
             break;
         case 20:
-            while(list.variable[switchNum][20] != '1' && list.variable[switchNum][20] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Is the timing belt present and intact?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][20];
+                cin >> list.variable[switchNum][3];
             }
             break;
         case 21:
-            while(list.variable[switchNum][21] != '1' && list.variable[switchNum][21] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Is the check engine light on?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][21];
+                cin >> list.variable[switchNum][3];
             }
             break;
         case 22:
-            while(list.variable[switchNum][22] != '1' && list.variable[switchNum][22] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Is there a strange smell to the exhaust when the engine is running?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][22];
+                cin >> list.variable[switchNum][3];
             }
             break;
         case 23:
-            while(list.variable[switchNum][23] != '1' && list.variable[switchNum][23] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Are the spark plugs faulty?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][23];
+                cin >> list.variable[switchNum][3];
             }
             break;
         case 24:
-            while(list.variable[switchNum][24] != '1' && list.variable[switchNum][24] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Does the engine sputter while driving?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][24];
+                cin >> list.variable[switchNum][3];
             }
             break;
         case 25:
-            while(list.variable[switchNum][25] != '1' && list.variable[switchNum][25] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Is the air filter dirty and/or clogged?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][25];
+                cin >> list.variable[switchNum][3];
             }
             break;
         case 26:
-            while(list.variable[switchNum][26] != '1' && list.variable[switchNum][26] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Does the enigne make a clicking sound whle trying to start?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][26];
+                cin >> list.variable[switchNum][3];
             }
             break;
         case 27:
-            while(list.variable[switchNum][27] != '1' && list.variable[switchNum][27] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Does the car exhibit poor acceleration?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][27];
+                cin >> list.variable[switchNum][3];
             }
             break;
         case 28:
-            while(list.variable[switchNum][28] != '1' && list.variable[switchNum][28] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Is the gas cap fully seated and tightly sealed?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][28];
+                cin >> list.variable[switchNum][3];
             }
             break;
         case 29:
-            while(list.variable[switchNum][29] != '1' && list.variable[switchNum][29] != '2'){
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Is the car outputting increased emissions?\nInput 1 for yes or 2 for no\n";
-                cin >> list.variable[switchNum][29];
+                cin >> list.variable[switchNum][3];
             }
             break;
     }
