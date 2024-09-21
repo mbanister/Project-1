@@ -15,8 +15,14 @@ string Diagnosis::startDiagnosis(){
     //while conclusions still on stack
     do{
         totalInc = 0;
+        /*while ((cStack.size() < 2 && strcmp(newCon, list.conclusion[cStack.top()]) != 0) &&
+               strcmp("DIA", list.conclusion[cStack.top()]) != 0) {
+            cNumInc = cStack.top() + 1;
+            cStack.pop();
+            cStack.push(cNumInc);
+        }*/
         //stops once empty cv is found (or at the end of the conclusion but this never happens)
-        while (strlen(claVar) != 0 && totalInc < 4){
+        do{
             //conclusion on stack not found
             conFound = false;
             //YE OL' GENERAL FORMULA (4 * (rule number / 10 -1) + 1)
@@ -40,7 +46,7 @@ string Diagnosis::startDiagnosis(){
                 }
                 askQuestion();
             }
-        }
+        }while (strlen(claVar) != 0 && totalInc < 4);
         checkRules();
         if (conSolved){
             //pop stacks
@@ -53,9 +59,15 @@ string Diagnosis::startDiagnosis(){
             int cNumInc = cStack.top() + 1;
             cStack.pop();
             cStack.push(cNumInc);
+            if (strcmp(list.conclusion[0], list.conclusion[cStack.top()]) != 0){
+                cNumInc = cStack.top() + 1;
+                cStack.pop();
+                cStack.push(cNumInc);
+            }
             //refresh cv stack
             cvStack.pop();
             cvStack.push(0);
+
         }
     }while(!cStack.empty());
     return problem;
@@ -65,8 +77,8 @@ void Diagnosis::initialize() {
     strcpy(list.conclusion[1], "BAT"); //Battery issues
     strcpy(list.conclusion[2], "DIA");
     strcpy(list.conclusion[3], "DIA");
-    strcpy(list.conclusion[4], "EVH"); //Engine overheats
-    strcpy(list.conclusion[5], "DIA");
+    strcpy(list.conclusion[4], "DIA");
+    strcpy(list.conclusion[5], "EVH"); //Engine overheats
     strcpy(list.conclusion[6], "DIA");
     strcpy(list.conclusion[7], "DIA");
     strcpy(list.conclusion[8], "DIA");
@@ -74,17 +86,17 @@ void Diagnosis::initialize() {
     strcpy(list.conclusion[10], "DIA"); 
     strcpy(list.conclusion[11], "DIA"); 
     strcpy(list.conclusion[12], "DIA");
-    strcpy(list.conclusion[13], "BRK"); //Brake issues
-    strcpy(list.conclusion[14], "DIA");
+    strcpy(list.conclusion[13], "DIA");
+    strcpy(list.conclusion[14], "BRK"); //Brake issues
     strcpy(list.conclusion[15], "DIA");
     strcpy(list.conclusion[16], "DIA");
     strcpy(list.conclusion[17], "DIA");
     strcpy(list.conclusion[18], "DIA");
     strcpy(list.conclusion[19], "DIA");
-    strcpy(list.conclusion[20], "DIA"); 
-    strcpy(list.conclusion[21], "EGI"); //Engine issues 
-    strcpy(list.conclusion[22], "EGI");
-    strcpy(list.conclusion[23], "DIA");
+    strcpy(list.conclusion[20], "DIA");
+    strcpy(list.conclusion[21], "DIA");
+    strcpy(list.conclusion[22], "EGI"); //Engine issues
+    strcpy(list.conclusion[23], "EGI");
     strcpy(list.conclusion[24], "DIA");
     strcpy(list.conclusion[25], "DIA");
     strcpy(list.conclusion[26], "DIA");
@@ -214,68 +226,72 @@ void Diagnosis::checkRules() {
             break;
         //if car starts and battery light is on
         case 2: if(list.variable[1][3] == '1' && list.variable[2][3] == '1'){
-                conSolved = 1;
                 //conclusions have their own variables in header
                 battery = true;
             }
+            else
+                battery = false;
+            conSolved = true;
             break;
         // if battery issues and holds charge
         case 3: if(battery &&  list.variable[3][3] == '1' ){
-                conSolved = 1;
+                conSolved = true;
                 problem = "DEAD BATTERY";
             }
             break;
         //if battery issues and doesn't hold charge
         case 4: if(battery &&  list.variable[3][3] == '2' ){
-                conSolved = 1;
+                conSolved = true;
                 problem = "BAD ALTERNATOR";
             }
             break;
         //if car starts and TPMS light on
         case 5: if(list.variable[1][3] == '1' &&  list.variable[4][3] == '1' ){
-                conSolved = 1;
+                conSolved = true;
                 problem = "DEFLATED TIRE";
             }
             break;
         //if car starts and temp warning light on
         case 6: if(list.variable[1][3] == '1' &&  list.variable[5][3] == '1' ){
-                conSolved = 1;
                 overheat = true;
             }
+                else
+                    overheat = false;
+                conSolved = true;
             break;
         //if overheating and coolant low
         case 7: if(overheat &&  list.variable[6][3] == '1' ){
-                conSolved = 1;
+                conSolved = true;
                 problem = "LOW COOLANT";
             }
             break;
         //if overheating and squeaking noises
         case 8: if(overheat &&  list.variable[7][3] == '1' ){
-                conSolved = 1;
+                conSolved = true;
                 problem = "BAD WATER PUMP";
             }
             break;
         //if overheating and radiator fan clogged
         case 9: if(overheat &&  list.variable[8][3] == '1' ){
-                conSolved = 1;
+                conSolved = true;
                 problem = "RADIATOR DAMAGE";
             }
             break;
         //if overheating and thermostat malf.
         case 10: if(overheat &&  list.variable[9][3] == '1' ){
-                conSolved = 1;
+                conSolved = true;
                 problem = "FAULTY RADIATOR";
             }
             break;
         //if car starts and WWF light on
         case 11: if(list.variable[1][3] == '1' &&  list.variable[10][3] == '1' ){
-                conSolved = 1;
+                conSolved = true;
                 problem = "LOW WWF";
             }
             break;
         //if car starts and window stuck
         case 12: if(list.variable[1][3] == '1' &&  list.variable[11][3] == '1' ){
-                conSolved = 1;
+                conSolved = true;
                 problem = "POWER WINDOW";
             }
             break;
@@ -293,9 +309,11 @@ void Diagnosis::checkRules() {
             break;
         //if car starts and brake warning light on
         case 15: if(list.variable[1][3] == '1' &&  list.variable[14][3] == '1' ){
-                conSolved = 1;
                 brakes = true;
             }
+                else
+                    brakes = false;
+                conSolved = 1;
             break;
         //if brake issues and brake fluid low
         case 16: if(brakes &&  list.variable[15][3] == '1' ){
@@ -341,15 +359,17 @@ void Diagnosis::checkRules() {
             break;
         //if car doesn't start 
         case 23: if(list.variable[1][3] == '2'){
+                engineIssue = true;
                 conSolved = 1;
-                engineIssue = true;;
             }
             break;
         //if engine light on
         case 24: if(list.variable[20][3] == '1' ){
-                conSolved = 1;
                 engineIssue = true;
             }
+            else
+                engineIssue = false;
+            conSolved = 1;
             break;
         //if engine issues and strange smell
         case 25: if(engineIssue &&  list.variable[21][3] == '1' ){

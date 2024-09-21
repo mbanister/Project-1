@@ -11,7 +11,7 @@ using namespace std;
 
 class Diagnosis{
 private:
-    bool conSolved, conFound,
+    bool conSolved = false, conFound,
         battery, overheat, brakes, engineIssue; //Todo: create other conclusion variables
     string problem;
     int cVNum, cvNumInc, /*cNumInc,*/ switchNum;
