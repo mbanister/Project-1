@@ -44,7 +44,7 @@ string Diagnosis::startDiagnosis(){
                     //skips question
                     continue;
                 }
-                askQuestion();
+                //askQuestion();
             }
         }while (strlen(claVar) != 0 && totalInc < 4);
         checkRules();
@@ -59,7 +59,7 @@ string Diagnosis::startDiagnosis(){
             int cNumInc = cStack.top() + 1;
             cStack.pop();
             cStack.push(cNumInc);
-            if (strcmp(list.conclusion[0], list.conclusion[cStack.top()]) != 0){
+            while(strcmp(list.conclusion[0], list.conclusion[cStack.top()]) != 0){
                 cNumInc = cStack.top() + 1;
                 cStack.pop();
                 cStack.push(cNumInc);
@@ -219,13 +219,28 @@ void Diagnosis::findConclusion(char conSearch[4]) {
 void Diagnosis::checkRules() {
     switch(cStack.top() + 1){
         //if no car problems
-        case 1: if(list.variable[0][3] == '2' ){
+        /*case 1: if(list.variable[0][3] == '2' ){
                 conSolved = 1;
+                problem = "NO PROBLEM";
+            }
+            break;*/
+        case 1:
+            if(list.variable[0][3] == 0)
+                askQuestion(0);
+            if(list.variable[0][3] == '2' ){
+                conSolved = true;
                 problem = "NO PROBLEM";
             }
             break;
         //if car starts and battery light is on
-        case 2: if(list.variable[1][3] == '1' && list.variable[2][3] == '1'){
+        case 2:
+            if(list.variable[1][3] == 0)
+                askQuestion(1);
+            if (list.variable[1][3] == '1') {
+                if (list.variable[2][3] == 0)
+                    askQuestion(2);
+            }
+            if (list.variable[1][3] == '1' && list.variable[2][3] == '1') {
                 //conclusions have their own variables in header
                 battery = true;
             }
@@ -234,203 +249,378 @@ void Diagnosis::checkRules() {
             conSolved = true;
             break;
         // if battery issues and holds charge
-        case 3: if(battery &&  list.variable[3][3] == '1' ){
+        case 3:
+            if (battery){
+                if (list.variable[3][3] == 0)
+                    askQuestion(3);
+            }
+            if(battery &&  list.variable[3][3] == '1' ){
                 conSolved = true;
                 problem = "DEAD BATTERY";
             }
             break;
         //if battery issues and doesn't hold charge
-        case 4: if(battery &&  list.variable[3][3] == '2' ){
+        case 4:
+            if (battery){
+                if (list.variable[3][3] == 0)
+                    askQuestion(3);
+            }
+            if(battery &&  list.variable[3][3] == '2' ){
                 conSolved = true;
                 problem = "BAD ALTERNATOR";
             }
             break;
         //if car starts and TPMS light on
-        case 5: if(list.variable[1][3] == '1' &&  list.variable[4][3] == '1' ){
+        case 5:
+            if(list.variable[1][3] == 0)
+                askQuestion(1);
+            if(list.variable[1][3] == '1') {
+                if (list.variable[4][3] == 0)
+                    askQuestion(4);
+            }
+            if(list.variable[1][3] == '1' &&  list.variable[4][3] == '1' ){
                 conSolved = true;
                 problem = "DEFLATED TIRE";
             }
             break;
         //if car starts and temp warning light on
-        case 6: if(list.variable[1][3] == '1' &&  list.variable[5][3] == '1' ){
+        case 6:
+            if(list.variable[1][3] == 0)
+                askQuestion(1);
+            if(list.variable[1][3] == '1') {
+                if (list.variable[5][3] == 0)
+                    askQuestion(5);
+            }
+            if(list.variable[1][3] == '1' &&  list.variable[5][3] == '1' ){
                 overheat = true;
             }
-                else
-                    overheat = false;
-                conSolved = true;
+            else
+                overheat = false;
+            conSolved = true;
             break;
         //if overheating and coolant low
-        case 7: if(overheat &&  list.variable[6][3] == '1' ){
+        case 7:
+            if(overheat){
+                if (list.variable[6][3] == 0)
+                    askQuestion(6);
+            }
+            if(overheat &&  list.variable[6][3] == '1' ){
                 conSolved = true;
                 problem = "LOW COOLANT";
             }
             break;
         //if overheating and squeaking noises
-        case 8: if(overheat &&  list.variable[7][3] == '1' ){
+        case 8:
+            if(overheat){
+                if (list.variable[7][3] == 0)
+                    askQuestion(7);
+            }
+            if(overheat &&  list.variable[7][3] == '1' ){
                 conSolved = true;
                 problem = "BAD WATER PUMP";
             }
             break;
         //if overheating and radiator fan clogged
-        case 9: if(overheat &&  list.variable[8][3] == '1' ){
+        case 9:
+            if(overheat){
+                if (list.variable[8][3] == 0)
+                    askQuestion(8);
+            }
+            if(overheat &&  list.variable[8][3] == '1' ){
                 conSolved = true;
                 problem = "RADIATOR DAMAGE";
             }
             break;
         //if overheating and thermostat malf.
-        case 10: if(overheat &&  list.variable[9][3] == '1' ){
+        case 10:
+            if(overheat){
+                if (list.variable[9][3] == 0)
+                    askQuestion(9);
+            }
+            if(overheat &&  list.variable[9][3] == '1' ){
                 conSolved = true;
                 problem = "FAULTY RADIATOR";
             }
             break;
         //if car starts and WWF light on
-        case 11: if(list.variable[1][3] == '1' &&  list.variable[10][3] == '1' ){
+        case 11:
+            if(list.variable[1][3] == 0)
+                askQuestion(1);
+            if(list.variable[1][3] == '1') {
+                if (list.variable[10][3] == 0)
+                    askQuestion(10);
+            }
+            if(list.variable[1][3] == '1' &&  list.variable[10][3] == '1' ){
                 conSolved = true;
                 problem = "LOW WWF";
             }
             break;
         //if car starts and window stuck
-        case 12: if(list.variable[1][3] == '1' &&  list.variable[11][3] == '1' ){
+        case 12:
+            if(list.variable[1][3] == 0)
+                askQuestion(1);
+            if(list.variable[1][3] == '1') {
+                if (list.variable[11][3] == 0)
+                    askQuestion(11);
+            }
+            if(list.variable[1][3] == '1' &&  list.variable[11][3] == '1' ){
                 conSolved = true;
                 problem = "POWER WINDOW";
             }
             break;
         //if car starts and clicking while turning
-        case 13: if(list.variable[1][3] == '1' &&  list.variable[12][3] == '1' ){
-                conSolved = 1;
+        case 13:
+            if(list.variable[1][3] == 0)
+                askQuestion(1);
+            if(list.variable[1][3] == '1') {
+                if (list.variable[12][3] == 0)
+                    askQuestion(12);
+            }
+            if(list.variable[1][3] == '1' &&  list.variable[12][3] == '1' ){
+                conSolved = true;
                 problem = "BROKEN CV JOINT";
             }
             break;
         //if car starts and difficulty turning
-        case 14: if(list.variable[1][3] == '1' &&  list.variable[13][3] == '1' ){
-                conSolved = 1;
+        case 14:
+            if(list.variable[1][3] == 0)
+                askQuestion(1);
+            if(list.variable[1][3] == '1') {
+                if (list.variable[13][3] == 0)
+                    askQuestion(13);
+            }
+            if(list.variable[1][3] == '1' &&  list.variable[13][3] == '1' ){
+                conSolved = true;
                 problem = "POWER STEERING";
             }
             break;
         //if car starts and brake warning light on
-        case 15: if(list.variable[1][3] == '1' &&  list.variable[14][3] == '1' ){
+        case 15:
+            if(list.variable[1][3] == 0)
+                askQuestion(1);
+            if(list.variable[1][3] == '1') {
+                if (list.variable[14][3] == 0)
+                    askQuestion(14);
+            }
+            if(list.variable[1][3] == '1' &&  list.variable[14][3] == '1' ){
                 brakes = true;
             }
-                else
-                    brakes = false;
-                conSolved = 1;
+            else
+                brakes = false;
+            conSolved = true;
             break;
         //if brake issues and brake fluid low
-        case 16: if(brakes &&  list.variable[15][3] == '1' ){
-                conSolved = 1;
+        case 16:
+            if(brakes){
+                if (list.variable[15][3] == 0)
+                    askQuestion(15);
+            }
+            if(brakes &&  list.variable[15][3] == '1' ){
+                conSolved = true;
                 problem = "LOW BRAKE FLUID";
             }
             break;
         //if brake issues and brake pads worn
-        case 17: if(brakes &&  list.variable[16][3] == '1' ){
-                conSolved = 1;
+        case 17:
+            if(brakes){
+                if (list.variable[16][3] == 0)
+                    askQuestion(16);
+            }
+            if(brakes &&  list.variable[16][3] == '1' ){
+                conSolved = true;
                 problem = "WORN BRAKE PADS";
             }
             break;
         //if brake issues and brake fluid and pads normal
-        case 18: if(brakes &&  list.variable[15][3] == '2' && list.variable[16][3] == '2'){
-                conSolved = 1;
+        case 18:
+            if(brakes){
+                if (list.variable[16][3] == 0)
+                    askQuestion(16);
+            }
+            if(brakes &&  list.variable[15][3] == '2' && list.variable[16][3] == '2'){
+                conSolved = true;
                 problem = "BRAKE SYS MALF";
             }
             break;
         // if car starts and ABS light on and brake fluid low
-        case 19: if(list.variable[1][3] == '1' &&  list.variable[17][3] == '1' && list.variable[15][3] == '1'){
-                conSolved = 1;
+        case 19:
+            if(list.variable[1][3] == 0)
+                askQuestion(1);
+            if(list.variable[1][3] == '1') {
+                if (list.variable[17][3] == 0)
+                    askQuestion(17);
+                if(list.variable[17][3] == '1') {
+                    if (list.variable[15][3] == 0)
+                        askQuestion(15);
+                }
+            }
+            if(list.variable[1][3] == '1' &&  list.variable[17][3] == '1' && list.variable[15][3] == '1'){
+                conSolved = true;
                 problem = "WHEEL SPEED SNS";
             }
             break;
         // if car starts and ABS light on and brake fluid normal
-        case 20: if(list.variable[1][3] == '1' &&  list.variable[17][3] == '1' && list.variable[15][3] == '2'){
-                conSolved = 1;
+        case 20:
+            if(list.variable[1][3] == 0)
+                askQuestion(1);
+            if(list.variable[1][3] == '1') {
+                if (list.variable[17][3] == 0)
+                    askQuestion(17);
+                if(list.variable[17][3] == '1') {
+                    if (list.variable[15][3] == 0)
+                        askQuestion(15);
+                }
+            }
+            if(list.variable[1][3] == '1' &&  list.variable[17][3] == '1' && list.variable[15][3] == '2'){
+                conSolved = true;
                 problem = "ABS SYSTEM MALF";
             }
             break;
         //if car starts and oil pressure low
-        case 21: if(list.variable[1][3] == '1' &&  list.variable[18][3] == '1' ){
-                conSolved = 1;
+        case 21:
+            if(list.variable[1][3] == 0)
+            askQuestion(1);
+            if(list.variable[1][3] == '1') {
+                if (list.variable[18][3] == 0)
+                    askQuestion(18);
+            }
+            if(list.variable[1][3] == '1' &&  list.variable[18][3] == '1' ){
+                conSolved = true;
                 problem = "LOW OIL";
             }
             break;
         //if car doesn't start and timing belt not intact
-        case 22: if(list.variable[1][3] == '2' &&  list.variable[19][3] == '1' ){
-                conSolved = 1;
+        case 22:
+            if(list.variable[1][3] == 0)
+                askQuestion(1);
+            if(list.variable[1][3] == '1') {
+                if (list.variable[19][3] == 0)
+                    askQuestion(19);
+            }
+            if(list.variable[1][3] == '2' &&  list.variable[19][3] == '1' ){
+                conSolved = true;
                 problem = "TIMING BELT BRK";
             }
             break;
         //if car doesn't start 
-        case 23: if(list.variable[1][3] == '2'){
-                engineIssue = true;
-                conSolved = 1;
+        case 23:
+            if(list.variable[1][3] == 0)
+                askQuestion(1);
+            if(list.variable[1][3] == '2'){
+                engine = true;
+                conSolved = true;
             }
             break;
         //if engine light on
-        case 24: if(list.variable[20][3] == '1' ){
-                engineIssue = true;
+        case 24:
+            if(list.variable[20][3] == 0)
+                askQuestion(20);
+            if(list.variable[20][3] == '1' ){
+                engine = true;
             }
             else
-                engineIssue = false;
-            conSolved = 1;
+                engine = false;
+            conSolved = true;
             break;
         //if engine issues and strange smell
-        case 25: if(engineIssue &&  list.variable[21][3] == '1' ){
-                conSolved = 1;
+        case 25:
+            if(engine){
+                if (list.variable[21][3] == 0)
+                    askQuestion(21);
+            }
+            if(engine && list.variable[21][3] == '1' ){
+                conSolved = true;
                 problem = "BAD OXYGEN SNSR";
             }
             break;
         //if engine issues and faulty spark plugs
-        case 26: if(engineIssue &&  list.variable[22][3] == '1' ){
-                conSolved = 1;
+        case 26:
+            if(engine){
+                if (list.variable[22][3] == 0)
+                    askQuestion(22);
+            }
+            if(engine && list.variable[22][3] == '1' ){
+                conSolved = true;
                 problem = "BAD SPARK PLUG";
             }
             break;
         //if engine issues and sputtering while driving
-        case 27: if(engineIssue &&  list.variable[23][3] == '1' ){
-                conSolved = 1;
+        case 27:
+            if(engine){
+                if (list.variable[23][3] == 0)
+                    askQuestion(23);
+            }
+            if(engine && list.variable[23][3] == '1' ){
+                conSolved = true;
                 problem = "BAD FUEL PUMP";
             }
             break;
         //if engine issues and air filter dirty
-        case 28: if(engineIssue &&  list.variable[24][3] == '1' ){
-                conSolved = 1;
+        case 28:
+            if(engine){
+                if (list.variable[24][3] == 0)
+                    askQuestion(24);
+            }
+            if(engine && list.variable[24][3] == '1' ){
+                conSolved = true;
                 problem = "AIR FILTER CLOG";
             }
             break;
         //if engine issues and clicking while starting
-        case 29: if(engineIssue &&  list.variable[25][3] == '1' ){
-                conSolved = 1;
+        case 29:
+            if(engine){
+                if (list.variable[25][3] == 0)
+                    askQuestion(25);
+            }
+            if(engine && list.variable[25][3] == '1' ){
+                conSolved = true;
                 problem = "STARTER MOTOR";
             }
             break;
         //if engine issues and poor acceleration
-        case 30: if(engineIssue &&  list.variable[26][3] == '1' ){
-                conSolved = 1;
+        case 30:
+            if(engine){
+                if (list.variable[26][3] == 0)
+                    askQuestion(26);
+            }
+            if(engine && list.variable[26][3] == '1' ){
+                conSolved = true;
                 problem = "M AIR FLOW SNSR";
             }
             break;
         //if engine issues and loose gas cap
-        case 31: if(engineIssue &&  list.variable[27][3] == '1' ){
-                conSolved = 1;
+        case 31:
+            if(engine){
+                if (list.variable[27][3] == 0)
+                    askQuestion(27);
+            }
+            if(engine && list.variable[27][3] == '1' ){
+                conSolved = true;
                 problem = "LOOSE GAS CAP";
             }
             break;
         //if engine issues and emissions increased
-        case 32: if(engineIssue &&  list.variable[28][3] == '1' ){
-                conSolved = 1;
+        case 32:
+            if(engine){
+                if (list.variable[28][3] == 0)
+                    askQuestion(28);
+            }
+            if(engine && list.variable[28][3] == '1' ){
+                conSolved = true;
                 problem = "STUCK EGR VALVE";
             }
             break;
-        
     }
 }
-void Diagnosis::askQuestion() {
-    switchNum = 0;
+void Diagnosis::askQuestion(int switchNum) {
+    //switchNum = 0;
     //finds variable
-    for (int i = 0; i < 29; i++) {
+    /*for (int i = 0; i < 29; i++) {
         if (strncmp(list.variable[i], list.clauseVariable[cVNum], 3) == 0) {
             switchNum = i;
             break;
         }
-    }
+    }*/
     switch (switchNum + 1) {
         case 1:
             while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
