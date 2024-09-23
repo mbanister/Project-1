@@ -95,8 +95,8 @@ void Diagnosis::initialize() {
     strcpy(list.conclusion[19], "DIA");
     strcpy(list.conclusion[20], "DIA");
     strcpy(list.conclusion[21], "DIA");
-    strcpy(list.conclusion[22], "EGI"); //Engine issues
-    strcpy(list.conclusion[23], "EGI");
+    strcpy(list.conclusion[22], "DIA");
+    strcpy(list.conclusion[23], "EGI"); //Engine issues
     strcpy(list.conclusion[24], "DIA");
     strcpy(list.conclusion[25], "DIA");
     strcpy(list.conclusion[26], "DIA");
@@ -136,6 +136,7 @@ void Diagnosis::initialize() {
     strcpy(list.variable[26], "PrA");//Poor acceleration
     strcpy(list.variable[27], "Gas");//Gas cap
     strcpy(list.variable[28], "Ems");//Emissions
+    strcpy(list.variable[29], "Fue");//Fuel level
 
     strcpy(list.clauseVariable[0],"CaT");//Diagnosis: no problems
     strcpy(list.clauseVariable[4],"CaS");//Battery issues: true
@@ -184,7 +185,9 @@ void Diagnosis::initialize() {
     strcpy(list.clauseVariable[84],"CaS");
     strcpy(list.clauseVariable[85],"TmB");
     strcpy(list.clauseVariable[88],"CaS");
-    strcpy(list.clauseVariable[92],"EgL");
+    strcpy(list.clauseVariable[89],"Fue");
+    strcpy(list.clauseVariable[92],"CaS");
+    strcpy(list.clauseVariable[93],"EgL");
     strcpy(list.clauseVariable[96],"EGI");
     strcpy(list.clauseVariable[97],"StS");
     strcpy(list.clauseVariable[100],"EGI");
@@ -339,7 +342,7 @@ void Diagnosis::checkRules() {
             }
             if(overheat &&  list.variable[9][3] == '1' ){
                 conSolved = true;
-                problem = "FAULTY RADIATOR";
+                problem = "FAULTY THERMOSTAT";
             }
             break;
         //if car starts and WWF light on
@@ -493,7 +496,7 @@ void Diagnosis::checkRules() {
         case 22:
             if(list.variable[1][3] == 0)
                 askQuestion(1);
-            if(list.variable[1][3] == '1') {
+            if(list.variable[1][3] == '2') {
                 if (list.variable[19][3] == 0)
                     askQuestion(19);
             }
@@ -506,17 +509,25 @@ void Diagnosis::checkRules() {
         case 23:
             if(list.variable[1][3] == 0)
                 askQuestion(1);
-            if(list.variable[1][3] == '2'){
-                engine = true;
+            if(list.variable[1][3] == '2') {
+                if (list.variable[29][3] == 0)
+                    askQuestion(29);
+            }
+            if(list.variable[1][3] == '2' &&  list.variable[29][3] == '1' ){
+                problem = "LOW FUEL";
                 conSolved = true;
             }
             break;
         //if engine light on
         case 24:
-            if(list.variable[20][3] == 0)
-                askQuestion(20);
-            if(list.variable[20][3] == '1' ){
-                engine = true;
+            if(list.variable[1][3] == 0)
+                askQuestion(1);
+            if(list.variable[1][3] == '2') {
+                if (list.variable[20][3] == 0)
+                    askQuestion(20);
+            }
+            if(list.variable[1][3] == '2' &&  list.variable[20][3] == '1' ){
+              engine = true;
             }
             else
                 engine = false;
@@ -624,7 +635,7 @@ void Diagnosis::askQuestion(int switchNum) {
     switch (switchNum + 1) {
         case 1:
             while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
-                cout << switchNum << "\nDoes the car have any issues?\n";
+                cout << "\nDoes the car have any issues?\n";
                 cout << "Input 1 for yes or 2 for no\n";
                 cin >> list.variable[0][3]; //3rd element is for storing answers
             }
@@ -797,6 +808,12 @@ void Diagnosis::askQuestion(int switchNum) {
         case 29:
             while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
                 cout << "Is the car outputting increased emissions?\nInput 1 for yes or 2 for no\n";
+                cin >> list.variable[switchNum][3];
+            }
+            break;
+        case 30:
+            while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
+                cout << "Does the car have no fuel?\nInput 1 for yes or 2 for no\n";
                 cin >> list.variable[switchNum][3];
             }
             break;

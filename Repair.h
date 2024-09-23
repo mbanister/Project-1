@@ -15,7 +15,8 @@ private:
     bool conFound, repaired = false;
     char carDiagnosis[15];
     int rNum, cVNum = 0;
-    string repair;stack <int> cvStack;
+    string repair;
+    stack <int> cvStack;
     struct List{
         char variable[8][15];
         char clauseVariable[67][15];

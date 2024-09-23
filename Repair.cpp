@@ -29,8 +29,8 @@ void Repair::initialize() {
 void Repair::findCondition(){
     conFound = false;
         //TODO:replace (1) with total clause variable
-        for (int i = 0; i < (1); i++) {
-            if (strcmp(carDiagnosis, list.clauseVariable[cVNum]) == 0) {
+        for (int i = 0; i < (3); i++) {
+            if (strcmp(carDiagnosis, list.clauseVariable[i]) == 0) {
                 conFound = true;
                 cVNum = i;
             }
