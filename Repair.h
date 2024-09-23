@@ -12,19 +12,19 @@ using namespace std;
 
 class Repair{
 private:
-    bool conFound, repaired = false;
-    char carDiagnosis[15];
+    bool ruleFound, repaired = false;
+    char carDiagnosis[30];
     int rNum, cVNum = 0;
     string repair;
     stack <int> cvStack;
     struct List{
-        char variable[8][15];
-        char clauseVariable[67][15];
+        char variable[29][30];
+        char clauseVariable[60][30];
     }list;
 public:
     string findTreatment(const string&);
     void initialize();
-    void findCondition();
+    void findRule();
     void checkRules();
 };
 

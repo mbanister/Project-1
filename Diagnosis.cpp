@@ -8,19 +8,13 @@ string Diagnosis::startDiagnosis(){
     cStack.push(0);
     //initializes cvStack (gets popped in do while loop)
     cvStack.push(0);
-    //cNumInc = 0;
-    //cvNumInc = 0;
+
     //total increments (mostly useless but exists if there happens to be a 4th variable to a rule)
     int totalInc;
     //while conclusions still on stack
     do{
         totalInc = 0;
-        /*while ((cStack.size() < 2 && strcmp(newCon, list.conclusion[cStack.top()]) != 0) &&
-               strcmp("DIA", list.conclusion[cStack.top()]) != 0) {
-            cNumInc = cStack.top() + 1;
-            cStack.pop();
-            cStack.push(cNumInc);
-        }*/
+
         //stops once empty cv is found (or at the end of the conclusion but this never happens)
         do{
             //conclusion on stack not found
@@ -186,7 +180,7 @@ void Diagnosis::initialize() {
     strcpy(list.clauseVariable[85],"TmB");
     strcpy(list.clauseVariable[88],"CaS");
     strcpy(list.clauseVariable[89],"Fue");
-    strcpy(list.clauseVariable[92],"CaS");
+    strcpy(list.clauseVariable[92],"CaT");
     strcpy(list.clauseVariable[93],"EgL");
     strcpy(list.clauseVariable[96],"EGI");
     strcpy(list.clauseVariable[97],"StS");
@@ -222,11 +216,6 @@ void Diagnosis::findConclusion(char conSearch[4]) {
 void Diagnosis::checkRules() {
     switch(cStack.top() + 1){
         //if no car problems
-        /*case 1: if(list.variable[0][3] == '2' ){
-                conSolved = 1;
-                problem = "NO PROBLEM";
-            }
-            break;*/
         case 1:
             if(list.variable[0][3] == 0)
                 askQuestion(0);
@@ -505,7 +494,7 @@ void Diagnosis::checkRules() {
                 problem = "TIMING BELT BRK";
             }
             break;
-        //if car doesn't start 
+        //if car doesn't start and no fuel
         case 23:
             if(list.variable[1][3] == 0)
                 askQuestion(1);
@@ -514,19 +503,19 @@ void Diagnosis::checkRules() {
                     askQuestion(29);
             }
             if(list.variable[1][3] == '2' &&  list.variable[29][3] == '1' ){
-                problem = "LOW FUEL";
+                problem = "NO FUEL";
                 conSolved = true;
             }
             break;
         //if engine light on
         case 24:
-            if(list.variable[1][3] == 0)
-                askQuestion(1);
-            if(list.variable[1][3] == '2') {
+            if(list.variable[0][3] == 0)
+                askQuestion(0);
+            if(list.variable[0][3] == '1') {
                 if (list.variable[20][3] == 0)
                     askQuestion(20);
             }
-            if(list.variable[1][3] == '2' &&  list.variable[20][3] == '1' ){
+            if(list.variable[0][3] == '1' &&  list.variable[20][3] == '1' ){
               engine = true;
             }
             else
@@ -605,7 +594,7 @@ void Diagnosis::checkRules() {
                 if (list.variable[27][3] == 0)
                     askQuestion(27);
             }
-            if(engine && list.variable[27][3] == '1' ){
+            if(engine && list.variable[27][3] == '2' ){
                 conSolved = true;
                 problem = "LOOSE GAS CAP";
             }
@@ -789,7 +778,7 @@ void Diagnosis::askQuestion(int switchNum) {
             break;
         case 26:
             while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
-                cout << "Does the enigne make a clicking sound whle trying to start?\nInput 1 for yes or 2 for no\n";
+                cout << "Does the engine make a clicking sound while trying to start?\nInput 1 for yes or 2 for no\n";
                 cin >> list.variable[switchNum][3];
             }
             break;
