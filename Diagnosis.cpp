@@ -489,7 +489,7 @@ void Diagnosis::checkRules() {
                 if (list.variable[19][3] == 0)
                     askQuestion(19);
             }
-            if(list.variable[1][3] == '2' &&  list.variable[19][3] == '1' ){
+            if(list.variable[1][3] == '2' &&  list.variable[19][3] == '2' ){
                 conSolved = true;
                 problem = "TIMING BELT BRK";
             }
@@ -502,7 +502,7 @@ void Diagnosis::checkRules() {
                 if (list.variable[29][3] == 0)
                     askQuestion(29);
             }
-            if(list.variable[1][3] == '2' &&  list.variable[29][3] == '1' ){
+            if(list.variable[1][3] == '2' &&  list.variable[29][3] == '2' ){
                 problem = "NO FUEL";
                 conSolved = true;
             }
@@ -802,7 +802,7 @@ void Diagnosis::askQuestion(int switchNum) {
             break;
         case 30:
             while(list.variable[switchNum][3] != '1' && list.variable[switchNum][3] != '2'){
-                cout << "Does the car have no fuel?\nInput 1 for yes or 2 for no\n";
+                cout << "Does the car have fuel?\nInput 1 for yes or 2 for no\n";
                 cin >> list.variable[switchNum][3];
             }
             break;

@@ -12,6 +12,6 @@ int main() {
     Diagnosis = dCar.startDiagnosis();
     cout << "Problem: "<< Diagnosis << endl;
     fix = rCar.findTreatment(Diagnosis);
-    cout << "Fix: " << fix;
+    cout << "Fix: " << fix << endl;
     return 0;
 }
