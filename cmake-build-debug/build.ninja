@@ -49,8 +49,8 @@ cmake_ninja_workdir = C$:/Users/miles/CLionProjects/Project$ 1/cmake-build-debug
 
 build cmake_object_order_depends_target_Project1: phony || CMakeFiles/Project1.dir
 
-build CMakeFiles/Project1.dir/main.cpp.obj: CXX_COMPILER__Project1_Debug C$:/Users/miles/CLionProjects/Project$ 1/main.cpp || cmake_object_order_depends_target_Project1
-  DEP_FILE = CMakeFiles\Project1.dir\main.cpp.obj.d
+build CMakeFiles/Project1.dir/Project1-mab572.cpp.obj: CXX_COMPILER__Project1_Debug C$:/Users/miles/CLionProjects/Project$ 1/Project1-mab572.cpp || cmake_object_order_depends_target_Project1
+  DEP_FILE = CMakeFiles\Project1.dir\Project1-mab572.cpp.obj.d
   FLAGS = -g -std=gnu++14
   OBJECT_DIR = CMakeFiles\Project1.dir
   OBJECT_FILE_DIR = CMakeFiles\Project1.dir
@@ -75,7 +75,7 @@ build CMakeFiles/Project1.dir/Repair.cpp.obj: CXX_COMPILER__Project1_Debug C$:/U
 #############################################
 # Link the executable Project1.exe
 
-build Project1.exe: CXX_EXECUTABLE_LINKER__Project1_Debug CMakeFiles/Project1.dir/main.cpp.obj CMakeFiles/Project1.dir/Diagnosis.cpp.obj CMakeFiles/Project1.dir/Repair.cpp.obj
+build Project1.exe: CXX_EXECUTABLE_LINKER__Project1_Debug CMakeFiles/Project1.dir/Project1-mab572.cpp.obj CMakeFiles/Project1.dir/Diagnosis.cpp.obj CMakeFiles/Project1.dir/Repair.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Project1.dir

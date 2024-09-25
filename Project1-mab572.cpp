@@ -1,6 +1,5 @@
 #include <iostream>
 #include<string>
-#include<vector>
 #include "Diagnosis.h"
 #include "Repair.h"
 using namespace std;

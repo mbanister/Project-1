@@ -12,9 +12,9 @@ using namespace std;
 class Diagnosis{
 private:
     bool conSolved = false, conFound,
-        battery, overheat, brakes, engine; //Todo: create other conclusion variables
+        battery, overheat, brakes, engine;
     string problem;
-    int cVNum, cvNumInc /*cNumInc,*/ /*switchNum*/;
+    int cVNum, cvNumInc;
     char newCon[4], claVar[4] = "emp";
     stack <int> cStack;
     stack <int> cvStack;
